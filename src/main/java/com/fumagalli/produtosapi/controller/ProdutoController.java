@@ -2,8 +2,10 @@ package com.fumagalli.produtosapi.controller;
 
 import com.fumagalli.produtosapi.model.ProdutoModel;
 import com.fumagalli.produtosapi.repository.ProdutoRepository;
+import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -47,5 +49,10 @@ public class ProdutoController {
                           @RequestBody ProdutoModel produtoModel){
         produtoModel.setId(id);
         produtoRepository.save(produtoModel);
+    }
+
+    @GetMapping
+    public List<ProdutoModel> buscarPorNome(@RequestParam("nome") String nome){
+        return produtoRepository.findByNome(nome);
     }
 }
